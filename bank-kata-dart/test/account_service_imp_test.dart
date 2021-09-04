@@ -44,7 +44,7 @@ void main() {
     test('print bank statement', () {
       account.printStatement();
 
-      verify(statementPrinter.print(transactions));
+      verify(statementPrinter.print(transactions.getAll()));
     });
   });
 }

@@ -1,6 +1,5 @@
 import 'package:bank_kata/printer.dart';
 import 'package:bank_kata/statement_printer.dart';
-import 'package:bank_kata/transactions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/scaffolding.dart';
 
@@ -13,7 +12,7 @@ void main() {
     test('print only headers when no have any transaction', () {
       const expectedStatementStr = 'Date       || Amount || Balance';
 
-      statementPrinter.print(Transactions.empty());
+      statementPrinter.print([]);
 
       verify(printer.print(expectedStatementStr));
     });

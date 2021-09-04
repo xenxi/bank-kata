@@ -24,7 +24,7 @@ class AccountServiceImp implements AccountService {
 
   @override
   void printStatement() {
-    _statementPrinter.print(_transactions);
+    _statementPrinter.print(_transactions.getAll());
   }
 
   @override
