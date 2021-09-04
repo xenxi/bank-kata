@@ -1,14 +1,21 @@
 import 'package:bank_kata/account_service_imp.dart';
 import 'package:bank_kata/printer.dart';
+import 'package:bank_kata/transactions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+
+import 'account_service_imp_test.dart';
 
 class MockPrinter extends Mock implements Printer {}
 
 void main() {
   group('AccountServiceImp should', () {
     final printer = MockPrinter();
-    final AccountServiceImp account = AccountServiceImp();
+    final dateTimeGetter = MockDateTimeGetter();
+    final AccountServiceImp account = AccountServiceImp(
+      Transactions(),
+      dateTimeGetter,
+    );
 
     test('print all transactions', () {
       account.deposit(1000);
@@ -16,6 +23,7 @@ void main() {
       account.withdraw(500);
 
       account.printStatement();
+
       verifyInOrder([
         printer.print('Date       || Amount || Balance'),
         printer.print('14/01/2012 || -500   || 2500'),
