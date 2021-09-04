@@ -16,25 +16,24 @@ void main() {
     final dateGetter = MockDateTimeGetter();
     final account = AccountServiceImp(transactions, dateGetter);
     test('store a transaction with 600 and current date when deposit 600', () {
-      final aGivenDateTimeNow = DateTime.now();
+      final aGivenTransaction = Transaction(600, DateTime.now());
       when(dateGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenDateTimeNow);
-      var transaction = Transaction(600, aGivenDateTimeNow);
+          .thenAnswer((realInvocation) => aGivenTransaction.date);
 
-      account.deposit(600);
+      account.deposit(aGivenTransaction.amount);
 
-      verify(transactions.add(transaction));
+      verify(transactions.add(aGivenTransaction));
     });
     test('store a transaction with -500 and current date when withdraw 500',
         () {
-      final aGivenDateTimeNow = DateTime.now();
+      final aGivenAmoun = 500;
+      final aGivenTransaction = Transaction(-aGivenAmoun, DateTime.now());
       when(dateGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenDateTimeNow);
-      var transaction = Transaction(-500, aGivenDateTimeNow);
+          .thenAnswer((realInvocation) => aGivenTransaction.date);
 
-      account.withdraw(500);
+      account.withdraw(aGivenAmoun);
 
-      verify(transactions.add(transaction));
+      verify(transactions.add(aGivenTransaction));
     });
   });
 }
