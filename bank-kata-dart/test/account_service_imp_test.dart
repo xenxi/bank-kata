@@ -18,7 +18,8 @@ void main() {
     final transactions = MockTransactions();
     final dateGetter = MockDateTimeGetter();
     final statementPrinter = MockStatementPrinter();
-    final account = AccountServiceImp(transactions, dateGetter);
+    final account =
+        AccountServiceImp(transactions, dateGetter, statementPrinter);
     test('store a transaction with 600 and current date when deposit 600', () {
       final aGivenTransaction = Transaction(600, DateTime.now());
       when(dateGetter.getCurrentDate())
