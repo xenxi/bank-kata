@@ -26,6 +26,8 @@ class AccountServiceImp implements AccountService {
 
   @override
   void withdraw(int amount) {
-    // TODO: implement withdraw
+    final newTransaction =
+        Transaction(-amount, _date.getCurrentDate() ?? DateTime.now());
+    _transactions.add(newTransaction);
   }
 }

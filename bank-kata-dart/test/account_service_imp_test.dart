@@ -25,5 +25,16 @@ void main() {
 
       verify(transactions.add(transaction));
     });
+    test('store a transaction with -500 and current date when withdraw 500',
+        () {
+      final aGivenDateTimeNow = DateTime.now();
+      when(dateGetter.getCurrentDate())
+          .thenAnswer((realInvocation) => aGivenDateTimeNow);
+      var transaction = Transaction(-500, aGivenDateTimeNow);
+
+      account.withdraw(500);
+
+      verify(transactions.add(transaction));
+    });
   });
 }
