@@ -12,10 +12,9 @@ void main() {
   group('AccountServiceImp should', () {
     final printer = MockPrinter();
     final dateTimeGetter = MockDateTimeGetter();
+    final statementPrinter = MockStatementPrinter();
     final AccountServiceImp account = AccountServiceImp(
-      Transactions(),
-      dateTimeGetter,
-    );
+        Transactions.empty(), dateTimeGetter, statementPrinter);
 
     test('print all transactions', () {
       account.deposit(1000);

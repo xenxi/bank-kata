@@ -1,5 +1,13 @@
 import 'package:bank_kata/transaction.dart';
 
 class Transactions {
-  void add(Transaction transaction) {}
+  final List<Transaction> _transactions;
+
+  Transactions(this._transactions);
+
+  void add(Transaction transaction) => _transactions.add(transaction);
+
+  List<Transaction> getAll() => _transactions;
+
+  factory Transactions.empty() => Transactions([]);
 }
