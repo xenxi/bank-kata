@@ -3,16 +3,14 @@ import 'package:bank_kata/date_time_getter.dart';
 import 'package:bank_kata/statement_printer.dart';
 import 'package:bank_kata/transaction.dart';
 import 'package:bank_kata/transactions.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test/test.dart';
 
-class MockTransactions extends Mock implements Transactions {}
+import 'account_service_imp_test.mocks.dart';
 
-class MockStatementPrinter extends Mock implements StatementPrinter {}
-
-class MockDateTimeGetter extends Mock implements DateTimeGetter {}
-
+@GenerateMocks([DateTimeGetter, StatementPrinter, Transactions])
 void main() {
   group('account service should', () {
     final transactions = MockTransactions();
@@ -42,9 +40,13 @@ void main() {
     });
 
     test('print bank statement', () {
+      final aGivenTransactions = <Transaction>[Transaction(1, DateTime.now())];
+      when(transactions.getAll())
+          .thenAnswer((realInvocation) => aGivenTransactions);
+
       account.printStatement();
 
-      verify(statementPrinter.print(transactions.getAll()));
+      verify(statementPrinter.print(aGivenTransactions));
     });
   });
 }

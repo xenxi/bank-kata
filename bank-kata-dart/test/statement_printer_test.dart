@@ -1,10 +1,12 @@
 import 'package:bank_kata/printer.dart';
 import 'package:bank_kata/statement_printer.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/scaffolding.dart';
 
-class MockPrinter extends Mock implements Printer {}
+import 'statement_printer_test.mocks.dart';
 
+@GenerateMocks([Printer])
 void main() {
   group('statement printer should', () {
     final printer = MockPrinter();

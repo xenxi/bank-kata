@@ -1,12 +1,10 @@
 import 'package:bank_kata/account_service_imp.dart';
-import 'package:bank_kata/printer.dart';
 import 'package:bank_kata/transactions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'account_service_imp_test.dart';
-
-class MockPrinter extends Mock implements Printer {}
+import 'account_service_imp_test.mocks.dart';
+import 'statement_printer_test.mocks.dart';
 
 void main() {
   group('AccountServiceImp should', () {

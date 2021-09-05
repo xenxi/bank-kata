@@ -17,20 +17,18 @@ class AccountServiceImp implements AccountService {
 
   @override
   void deposit(int amount) {
-    final newTransaction =
-        Transaction(amount, _date.getCurrentDate() ?? DateTime.now());
+    final newTransaction = Transaction(amount, _date.getCurrentDate());
     _transactions.add(newTransaction);
   }
 
   @override
   void printStatement() {
-    _statementPrinter.print(_transactions.getAll());
+    _statementPrinter.print(_transactions.getAll() ?? []);
   }
 
   @override
   void withdraw(int amount) {
-    final newTransaction =
-        Transaction(-amount, _date.getCurrentDate() ?? DateTime.now());
+    final newTransaction = Transaction(-amount, _date.getCurrentDate());
     _transactions.add(newTransaction);
   }
 }

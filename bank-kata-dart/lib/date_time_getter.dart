@@ -1,5 +1,5 @@
 class DateTimeGetter {
-  DateTime? getCurrentDate() {
+  DateTime getCurrentDate() {
     return DateTime.now();
   }
 }
