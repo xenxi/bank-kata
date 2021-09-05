@@ -1,3 +1,4 @@
+import 'package:bank_kata/date_time_getter.dart';
 import 'package:bank_kata/transaction.dart';
 import 'package:bank_kata/transactions.dart';
 import 'package:test/expect.dart';
@@ -5,10 +6,10 @@ import 'package:test/scaffolding.dart';
 
 void main() {
   group('transactions should', () {
-    Transactions transactions = Transactions.empty();
+    Transactions transactions = Transactions.empty(DateTimeGetter());
 
     setUp(() {
-      transactions = Transactions.empty();
+      transactions = Transactions.empty(DateTimeGetter());
     });
 
     test('store a transaction', () {
