@@ -14,31 +14,23 @@ import 'account_service_imp_test.mocks.dart';
 void main() {
   group('account service should', () {
     final transactions = MockTransactions();
-    final dateGetter = MockDateTimeGetter();
     final statementPrinter = MockStatementPrinter();
-    final account =
-        AccountServiceImp(transactions, dateGetter, statementPrinter);
+    final account = AccountServiceImp(transactions, statementPrinter);
     test('store a transaction with 600 and current date when deposit 600', () {
-      final aGivenTransaction =
-          Transaction(amount: 600, date: DateTime.now(), balance: 600);
-      when(dateGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenTransaction.date);
+      var aGivenAmount = 600;
 
-      account.deposit(aGivenTransaction.amount);
+      account.deposit(aGivenAmount);
 
-      verify(transactions.add(aGivenTransaction));
+      verify(transactions.add(aGivenAmount));
     });
     test('store a transaction with -500 and current date when withdraw 500',
         () {
       final aGivenAmoun = 500;
-      final aGivenTransaction = Transaction(
-          amount: -aGivenAmoun, date: DateTime.now(), balance: -aGivenAmoun);
-      when(dateGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenTransaction.date);
 
       account.withdraw(aGivenAmoun);
 
-      verify(transactions.add(aGivenTransaction));
+      final expectedAmount = -aGivenAmoun;
+      verify(transactions.add(expectedAmount));
     });
 
     test('print bank statement', () {

@@ -11,10 +11,8 @@ class Transactions {
 
   factory Transactions.empty(DateTimeGetter clock) => Transactions([], clock);
 
-  void add(Transaction transaction) => _transactions.add(transaction);
-
   List<Transaction> getAll() => _transactions;
 
-  void addAmount(int amount) => _transactions.add(Transaction(
+  void add(int amount) => _transactions.add(Transaction(
       amount: amount, balance: amount, date: _clock.getCurrentDate()));
 }

@@ -1,31 +1,31 @@
-import 'package:bank_kata/date_time_getter.dart';
 import 'package:bank_kata/transaction.dart';
 import 'package:bank_kata/transactions.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 
+import 'account_service_imp_test.mocks.dart';
+
 void main() {
   group('transactions should', () {
-    Transactions transactions = Transactions.empty(DateTimeGetter());
+    final dateTimeGetter = MockDateTimeGetter();
+    Transactions transactions = Transactions.empty(dateTimeGetter);
 
     setUp(() {
-      transactions = Transactions.empty(DateTimeGetter());
+      transactions = Transactions.empty(dateTimeGetter);
     });
 
     test('store a transaction', () {
-      final aGivenTransaction =
-          Transaction(amount: 600, date: DateTime.now(), balance: 0);
-      final aGivenOtherTransaction = Transaction(
-          amount: 600,
-          date: DateTime.now().add(Duration(hours: 5)),
-          balance: 1);
+      final aGivenAmount = 600;
+      final aGivenDate = DateTime.now();
+      when(dateTimeGetter.getCurrentDate())
+          .thenAnswer((realInvocation) => aGivenDate);
 
-      transactions.add(aGivenTransaction);
-      transactions.add(aGivenOtherTransaction);
+      transactions.add(aGivenAmount);
 
       final expectedTransactions = <Transaction>[
-        aGivenTransaction,
-        aGivenOtherTransaction
+        Transaction(
+            amount: aGivenAmount, date: aGivenDate, balance: aGivenAmount)
       ];
       expect(transactions.getAll(), expectedTransactions);
     });

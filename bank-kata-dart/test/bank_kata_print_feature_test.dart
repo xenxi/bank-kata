@@ -12,8 +12,8 @@ void main() {
     final printer = MockPrinter();
     final dateTimeGetter = MockDateTimeGetter();
     final statementPrinter = StatementPrinter(printer);
-    final AccountServiceImp account = AccountServiceImp(
-        Transactions.empty(dateTimeGetter), dateTimeGetter, statementPrinter);
+    final AccountServiceImp account =
+        AccountServiceImp(Transactions.empty(dateTimeGetter), statementPrinter);
 
     test('print all transactions', () {
       final aGivenDates = <DateTime>[
