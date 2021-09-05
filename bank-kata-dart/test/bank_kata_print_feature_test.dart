@@ -17,9 +17,9 @@ void main() {
 
     test('print all transactions', () {
       final aGivenDates = <DateTime>[
-        DateTime(2012, 1, 14),
-        DateTime(2012, 1, 13),
         DateTime(2012, 1, 10),
+        DateTime(2012, 1, 13),
+        DateTime(2012, 1, 14),
       ];
       var callCount = 0;
       when(dateTimeGetter.getCurrentDate())
