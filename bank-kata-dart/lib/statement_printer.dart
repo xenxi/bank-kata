@@ -10,12 +10,20 @@ class StatementPrinter {
     _printer.print(_header);
 
     if (transactions.isNotEmpty) {
-      transactions.sort((a, b) => b.date.compareTo(a.date));
-
-      for (var transaction in transactions) {
-        _printer.print(_printTransaction(transaction));
-      }
+      _printTransactionsLines(transactions);
     }
+  }
+
+  void _printTransactionsLines(List<Transaction> transactions) {
+    _orderCronologicalDescending(transactions);
+
+    for (var transaction in transactions) {
+      _printer.print(_printTransaction(transaction));
+    }
+  }
+
+  void _orderCronologicalDescending(List<Transaction> transactions) {
+    transactions.sort((a, b) => b.date.compareTo(a.date));
   }
 
   String _printTransaction(Transaction transaction) {
