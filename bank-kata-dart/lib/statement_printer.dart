@@ -9,8 +9,12 @@ class StatementPrinter {
   void print(List<Transaction> transactions) {
     _printer.print(_header);
 
-    for (var transaction in transactions) {
-      _printer.print(_printTransaction(transaction));
+    if (transactions.isNotEmpty) {
+      transactions.sort((a, b) => b.date.compareTo(a.date));
+
+      for (var transaction in transactions) {
+        _printer.print(_printTransaction(transaction));
+      }
     }
   }
 

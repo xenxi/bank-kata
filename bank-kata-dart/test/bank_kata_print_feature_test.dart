@@ -1,4 +1,5 @@
 import 'package:bank_kata/account_service_imp.dart';
+import 'package:bank_kata/statement_printer.dart';
 import 'package:bank_kata/transactions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -10,7 +11,7 @@ void main() {
   group('AccountServiceImp should', () {
     final printer = MockPrinter();
     final dateTimeGetter = MockDateTimeGetter();
-    final statementPrinter = MockStatementPrinter();
+    final statementPrinter = StatementPrinter(printer);
     final AccountServiceImp account = AccountServiceImp(
         Transactions.empty(), dateTimeGetter, statementPrinter);
 

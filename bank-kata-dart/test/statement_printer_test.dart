@@ -21,9 +21,9 @@ void main() {
     });
     test('print stored transactions in descending cronological order', () {
       final aGiventTransactions = [
-        Transaction(amount: -500, date: DateTime(2012, 1, 14), balance: 2500),
-        Transaction(amount: 2000, date: DateTime(2012, 1, 13), balance: 3000),
         Transaction(amount: 1000, date: DateTime(2012, 1, 10), balance: 1000),
+        Transaction(amount: 2000, date: DateTime(2012, 1, 13), balance: 3000),
+        Transaction(amount: -500, date: DateTime(2012, 1, 14), balance: 2500),
       ];
 
       statementPrinter.print(aGiventTransactions);
