@@ -9,14 +9,23 @@ class StatementPrinter {
   void print(List<Transaction> transactions) {
     _printer.print(_header);
     transactions.forEach((transaction) {
-      _printer.print(
-          '${_dateFormat(transaction.date)} || ${_amountFormat(transaction.amount)}|| ${transaction.balance}');
+      _printer.print(_printTransaction(transaction));
     });
   }
 
-  String _dateFormat(DateTime date) => '';
+  String _printTransaction(Transaction transaction) {
+    final line =
+        '${_dateFormat(transaction.date)} || ${_amountFormat(transaction.amount)} || ${transaction.balance}';
 
-  _amountFormat(int amount) {}
+    return line;
+  }
+
+  String _dateFormat(DateTime date) =>
+      '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+
+  String _amountFormat(int amount) {
+    return amount.toString().padRight(6, ' ');
+  }
 }
 // Date       || Amount || Balance
 // 14/01/2012 || -500   || 2500
