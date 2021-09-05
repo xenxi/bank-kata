@@ -13,6 +13,20 @@ class Transactions {
 
   List<Transaction> getAll() => _transactions;
 
-  void add(int amount) => _transactions.add(Transaction(
-      amount: amount, balance: amount, date: _clock.getCurrentDate()));
+  void add(int amount) {
+    final calculeBalance = _calculeBalance(amount);
+    final transaction = Transaction(
+        amount: amount, balance: calculeBalance, date: _clock.getCurrentDate());
+
+    _transactions.add(transaction);
+  }
+
+  int _calculeBalance(int amount) {
+    final currentBalance = _transactions.isNotEmpty
+        ? _transactions
+            .map((e) => e.amount)
+            .reduce((value, element) => value + element)
+        : 0;
+    return amount + currentBalance;
+  }
 }

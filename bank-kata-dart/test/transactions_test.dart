@@ -45,6 +45,7 @@ void main() {
       final aGivenDateTime = DateTime.now().add(Duration(hours: 1));
       when(dateTimeGetter.getCurrentDate())
           .thenAnswer((realInvocation) => aGivenDateTime);
+      transactions = Transactions(aGivenTransactions.toList(), dateTimeGetter);
 
       transactions.add(100);
 
@@ -52,7 +53,9 @@ void main() {
         ...aGivenTransactions,
         Transaction(amount: 100, date: aGivenDateTime, balance: 350)
       ];
-      expect(transactions.getAll(), expectedTransactions);
+
+      final result = transactions.getAll();
+      expect(result, expectedTransactions);
     });
   });
 }
