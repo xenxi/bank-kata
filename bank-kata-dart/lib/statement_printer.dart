@@ -10,7 +10,7 @@ class StatementPrinter {
     _printer.print(_header);
     transactions.forEach((transaction) {
       _printer.print(
-          '${_dateFormat(transaction.date)} || ${_amountFormat(transaction.amount)}|| ${1}');
+          '${_dateFormat(transaction.date)} || ${_amountFormat(transaction.amount)}|| ${transaction.balance}');
     });
   }
 

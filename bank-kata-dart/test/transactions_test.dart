@@ -12,9 +12,12 @@ void main() {
     });
 
     test('store a transaction', () {
-      final aGivenTransaction = Transaction(600, DateTime.now());
-      final aGivenOtherTransaction =
-          Transaction(600, DateTime.now().add(Duration(hours: 5)));
+      final aGivenTransaction =
+          Transaction(amount: 600, date: DateTime.now(), balance: 0);
+      final aGivenOtherTransaction = Transaction(
+          amount: 600,
+          date: DateTime.now().add(Duration(hours: 5)),
+          balance: 1);
 
       transactions.add(aGivenTransaction);
       transactions.add(aGivenOtherTransaction);

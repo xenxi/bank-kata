@@ -19,7 +19,8 @@ void main() {
     final account =
         AccountServiceImp(transactions, dateGetter, statementPrinter);
     test('store a transaction with 600 and current date when deposit 600', () {
-      final aGivenTransaction = Transaction(600, DateTime.now());
+      final aGivenTransaction =
+          Transaction(amount: 600, date: DateTime.now(), balance: 600);
       when(dateGetter.getCurrentDate())
           .thenAnswer((realInvocation) => aGivenTransaction.date);
 
@@ -30,7 +31,8 @@ void main() {
     test('store a transaction with -500 and current date when withdraw 500',
         () {
       final aGivenAmoun = 500;
-      final aGivenTransaction = Transaction(-aGivenAmoun, DateTime.now());
+      final aGivenTransaction = Transaction(
+          amount: -aGivenAmoun, date: DateTime.now(), balance: -aGivenAmoun);
       when(dateGetter.getCurrentDate())
           .thenAnswer((realInvocation) => aGivenTransaction.date);
 
@@ -40,7 +42,9 @@ void main() {
     });
 
     test('print bank statement', () {
-      final aGivenTransactions = <Transaction>[Transaction(1, DateTime.now())];
+      final aGivenTransactions = <Transaction>[
+        Transaction(amount: 1, date: DateTime.now(), balance: 0)
+      ];
       when(transactions.getAll())
           .thenAnswer((realInvocation) => aGivenTransactions);
 

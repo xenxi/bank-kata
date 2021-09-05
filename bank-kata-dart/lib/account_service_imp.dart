@@ -17,8 +17,7 @@ class AccountServiceImp implements AccountService {
 
   @override
   void deposit(int amount) {
-    final newTransaction = Transaction(amount, _date.getCurrentDate());
-    _transactions.add(newTransaction);
+    _addTransaction(amount);
   }
 
   @override
@@ -28,7 +27,12 @@ class AccountServiceImp implements AccountService {
 
   @override
   void withdraw(int amount) {
-    final newTransaction = Transaction(-amount, _date.getCurrentDate());
+    _addTransaction(-amount);
+  }
+
+  void _addTransaction(int amount) {
+    final newTransaction = Transaction(
+        amount: amount, date: _date.getCurrentDate(), balance: amount);
     _transactions.add(newTransaction);
   }
 }
