@@ -63,5 +63,9 @@ class MockTransactions extends _i1.Mock implements _i5.Transactions {
       super.noSuchMethod(Invocation.method(#add, [transaction]),
           returnValueForMissingStub: null);
   @override
+  List<_i4.Transaction> getAll() =>
+      (super.noSuchMethod(Invocation.method(#getAll, []),
+          returnValue: <_i4.Transaction>[]) as List<_i4.Transaction>);
+  @override
   String toString() => super.toString();
 }

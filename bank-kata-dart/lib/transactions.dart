@@ -7,7 +7,7 @@ class Transactions {
 
   void add(Transaction transaction) => _transactions.add(transaction);
 
-  List<Transaction>? getAll() => _transactions;
+  List<Transaction> getAll() => _transactions;
 
   factory Transactions.empty() => Transactions([]);
 }
