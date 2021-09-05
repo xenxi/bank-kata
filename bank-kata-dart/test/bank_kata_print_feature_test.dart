@@ -15,6 +15,15 @@ void main() {
         Transactions.empty(), dateTimeGetter, statementPrinter);
 
     test('print all transactions', () {
+      final aGivenDates = <DateTime>[
+        DateTime(2012, 1, 14),
+        DateTime(2012, 1, 13),
+        DateTime(2012, 1, 10),
+      ];
+      var callCount = 0;
+      when(dateTimeGetter.getCurrentDate())
+          .thenAnswer((realInvocation) => aGivenDates[callCount++]);
+
       account.deposit(1000);
       account.deposit(2000);
       account.withdraw(500);

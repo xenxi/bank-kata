@@ -8,9 +8,10 @@ class StatementPrinter {
   StatementPrinter(this._printer);
   void print(List<Transaction> transactions) {
     _printer.print(_header);
-    transactions.forEach((transaction) {
+
+    for (var transaction in transactions) {
       _printer.print(_printTransaction(transaction));
-    });
+    }
   }
 
   String _printTransaction(Transaction transaction) {
@@ -27,7 +28,3 @@ class StatementPrinter {
     return amount.toString().padRight(6, ' ');
   }
 }
-// Date       || Amount || Balance
-// 14/01/2012 || -500   || 2500
-// 13/01/2012 || 2000   || 3000
-// 10/01/2012 || 1000   || 1000d
