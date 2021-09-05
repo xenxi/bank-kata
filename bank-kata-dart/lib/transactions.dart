@@ -11,7 +11,7 @@ class Transactions {
 
   factory Transactions.empty(DateTimeGetter clock) => Transactions([], clock);
 
-  List<Transaction> getAll() => _transactions;
+  List<Transaction> getAll() => _transactions.toList();
 
   void add(int amount) {
     final calculeBalance = _calculeBalance(amount);

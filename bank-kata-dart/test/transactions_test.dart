@@ -7,8 +7,14 @@ import 'package:test/scaffolding.dart';
 import 'account_service_imp_test.mocks.dart';
 
 void main() {
+  final dateTimeGetter = MockDateTimeGetter();
+
+  void shouldGetCurrentDate(DateTime aGivenDateTime) {
+    when(dateTimeGetter.getCurrentDate())
+        .thenAnswer((realInvocation) => aGivenDateTime);
+  }
+
   group('transactions should', () {
-    final dateTimeGetter = MockDateTimeGetter();
     Transactions transactions = Transactions.empty(dateTimeGetter);
 
     setUp(() {
@@ -18,8 +24,7 @@ void main() {
     test('store a transaction', () {
       final aGivenAmount = 600;
       final aGivenDate = DateTime.now();
-      when(dateTimeGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenDate);
+      shouldGetCurrentDate(aGivenDate);
 
       transactions.add(aGivenAmount);
 
@@ -31,21 +36,11 @@ void main() {
     });
 
     test('update balance when store transactions', () {
-      final aGivenTransactions = <Transaction>[
-        Transaction(amount: 100, date: DateTime.now(), balance: 100),
-        Transaction(
-            amount: 200,
-            date: DateTime.now().add(Duration(minutes: 2)),
-            balance: 300),
-        Transaction(
-            amount: -50,
-            date: DateTime.now().add(Duration(minutes: 5)),
-            balance: 250),
-      ];
+      transactions =
+          aGivenTransactionsWithBalanceOf250(transactions, dateTimeGetter);
       final aGivenDateTime = DateTime.now().add(Duration(hours: 1));
-      when(dateTimeGetter.getCurrentDate())
-          .thenAnswer((realInvocation) => aGivenDateTime);
-      transactions = Transactions(aGivenTransactions.toList(), dateTimeGetter);
+      final aGivenTransactions = transactions.getAll();
+      shouldGetCurrentDate(aGivenDateTime);
 
       transactions.add(100);
 
@@ -58,4 +53,22 @@ void main() {
       expect(result, expectedTransactions);
     });
   });
+}
+
+Transactions aGivenTransactionsWithBalanceOf250(
+    Transactions transactions, MockDateTimeGetter dateTimeGetter) {
+  final aGivenTransactions = <Transaction>[
+    Transaction(amount: 100, date: DateTime.now(), balance: 100),
+    Transaction(
+        amount: 200,
+        date: DateTime.now().add(Duration(minutes: 2)),
+        balance: 300),
+    Transaction(
+        amount: -50,
+        date: DateTime.now().add(Duration(minutes: 5)),
+        balance: 250),
+  ];
+
+  transactions = Transactions(aGivenTransactions, dateTimeGetter);
+  return transactions;
 }
